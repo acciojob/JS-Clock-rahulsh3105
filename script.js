@@ -1,23 +1,26 @@
+const hourHand = document.querySelector(".hour-hand");
+const minuteHand = document.querySelector(".min-hand");
+const secondHand = document.querySelector(".second-hand");
+
+// Function to update clock hands rotation
 function setDate() {
-  const now = new Date();
+const now = new Date();
 
-  const seconds = now.getSeconds();
-  const secondsDegrees = ((seconds / 60) * 360) + 90;
-  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+// Get seconds, minutes and hours
+const seconds = now.getSeconds();
+const minutes = now.getMinutes();
+const hours = now.getHours();
 
-  const mins = now.getMinutes();
-  const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-  minHand.style.transform = `rotate(${minsDegrees}deg)`;
+// Calculate rotation angles in degrees
+const secondsDegrees = (seconds / 60) * 360 + 90;
+const minutesDegrees = (minutes / 60) * 360 + 90;
+const hoursDegrees = (hours / 12) * 360 + 90;
 
-  const hour = now.getHours();
-  const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
-  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-
-  if (secondsDegrees === 90) {
-    // Add class 'no-transition' to secondHand
-    secondHand.classList.add('no-transition');
-  } else if (secondHand.classList.contains('no-transition')) {
-    // Remove class 'no-transition' from secondHand after the first second
-    secondHand.classList.remove('no-transition');
-  }
+// Update rotation of clock hands
+secondHand.style.transform = rotate(${secondsDegrees}deg);
+minuteHand.style.transform = rotate(${minutesDegrees}deg);
+hourHand.style.transform = rotate(${hoursDegrees}deg);
 }
+
+// Call setDate function every second to update clock hands rotation
+setInterval(setDate, 1000);
